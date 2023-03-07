@@ -125,5 +125,4 @@ RSpec.describe 'invoices show' do
       expect(current_path).to eq(merchant_bulk_discount_path(@merchant1, @discount2))
     end
   end
-
 end
