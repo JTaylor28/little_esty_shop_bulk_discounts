@@ -30,13 +30,26 @@ RSpec.describe InvoiceItem, type: :model do
       @i3 = Invoice.create!(customer_id: @c2.id, status: 2)
       @i4 = Invoice.create!(customer_id: @c3.id, status: 2)
       @i5 = Invoice.create!(customer_id: @c4.id, status: 2)
-      @ii_1 = InvoiceItem.create!(invoice_id: @i1.id, item_id: @item_1.id, quantity: 1, unit_price: 10, status: 0)
-      @ii_2 = InvoiceItem.create!(invoice_id: @i1.id, item_id: @item_2.id, quantity: 1, unit_price: 8, status: 0)
-      @ii_3 = InvoiceItem.create!(invoice_id: @i2.id, item_id: @item_3.id, quantity: 1, unit_price: 5, status: 2)
+      @ii_1 = InvoiceItem.create!(invoice_id: @i1.id, item_id: @item_1.id, quantity: 9, unit_price: 10, status: 0)
+      @ii_2 = InvoiceItem.create!(invoice_id: @i1.id, item_id: @item_2.id, quantity: 12, unit_price: 8, status: 0)
+      @ii_3 = InvoiceItem.create!(invoice_id: @i2.id, item_id: @item_3.id, quantity: 5, unit_price: 5, status: 2)
       @ii_4 = InvoiceItem.create!(invoice_id: @i3.id, item_id: @item_3.id, quantity: 1, unit_price: 5, status: 1)
+      @discount1 = @m1.bulk_discounts.create(percentage_discount: 0.20 , quantity_threshold: 10)
+      @discount2 = @m1.bulk_discounts.create(percentage_discount: 0.15 , quantity_threshold: 4)
+      @discount3 = @m1.bulk_discounts.create(percentage_discount: 0.10 , quantity_threshold: 5)
     end
-    it 'incomplete_invoices' do
-      expect(InvoiceItem.incomplete_invoices).to eq([@i1, @i3])
+    describe 'class methods' do
+      it 'incomplete_invoices' do
+        expect(InvoiceItem.incomplete_invoices).to eq([@i1, @i3])
+      end
+    end
+
+    describe 'instance methods' do
+      it 'applied_discount' do
+        expect(@ii_1.applied_discount).to eq(@discount2)
+        expect(@ii_2.applied_discount).to eq(@discount1)
+        expect(@ii_4.applied_discount).to eq(nil)
+      end
     end
   end
 end

@@ -57,7 +57,7 @@ describe 'Admin Invoices Index Page' do
     expect(page).to_not have_content("$#{@ii_3.unit_price}")
     expect(page).to_not have_content(@ii_3.status)
   end
-
+  #User Story 8
   it 'should display the total revenue the invoice will generate' do
     expect(page).to have_content("Total Revenue: $#{@i1.total_revenue}")
 
@@ -74,11 +74,9 @@ describe 'Admin Invoices Index Page' do
       expect(@i1.status).to eq('completed')
     end
   end
-
-
-  #User story 8
+  
+  #User Story 8
   it "I see the total discounted revenue from this invoice which includes bulk discounts in the calculation" do
-    save_and_open_page
     visit admin_invoice_path(@i1)
     expect(page).to have_content("Revenue after discount: $24.30" )
   end
