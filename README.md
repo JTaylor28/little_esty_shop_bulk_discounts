@@ -87,3 +87,5 @@ When I visit the discounts index page
 I see a section with a header of "Upcoming Holidays"
 In this section the name and date of the next 3 upcoming US holidays are listed.
 
+#### Schema
+![Untitled (1)](https://user-images.githubusercontent.com/117054959/223614334-89de6568-53d0-4911-a863-b0c9aaa85d05.png)
