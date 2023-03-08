@@ -52,6 +52,18 @@ RSpec.describe "Merchant Bulk Discounts Index" do
         end
         expect(page).to_not have_content("Discount ##{@discount1.id}'s Page")
       end
+      #user story 9
+      describe 'I see a section with a header of Upcoming Holidays' do
+        it 'this section the name and date of the next 3 upcoming US holidays are listed' do
+          expect(page).to have_content("Upcoming Holidays")
+          expect(page).to have_content("Holiday Name: Good Friday")
+          expect(page).to have_content("Holiday Date: 2023-04-07")
+          expect(page).to have_content("Holiday Name: Memorial Day")
+          expect(page).to have_content("Holiday Date: 2023-05-29")
+          expect(page).to have_content("Holiday Name: Juneteenth")
+          expect(page).to have_content("Holiday Date: 2023-06-19")
+        end
+      end 
     end
   end
 end

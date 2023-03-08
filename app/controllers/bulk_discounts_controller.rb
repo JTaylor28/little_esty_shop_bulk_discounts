@@ -3,6 +3,8 @@ class BulkDiscountsController < ApplicationController
   def index
     @merchant = Merchant.find(params[:merchant_id])
     @bulk_discounts = @merchant.bulk_discounts
+    get_next_three_holidays = HolidayService.get_holidays.first(3)
+    @holidays = get_next_three_holidays.map {|holiday| UsHoliday.new(holiday) }
   end
 
   def show
